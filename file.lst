@@ -1,0 +1,53 @@
+     1                                 %line 1+1 file.asm
+     2                                 [global main]
+     3                                 [extern scanf]
+     4                                 [extern printf]
+     5                                 [segment .data]
+     6 00000000 00000000                x: dd 0
+     7 00000004 00<rept>                s: times 100 db 0
+     8 00000068 496E70757420737472-     i: db "Input string : ",0
+     9 00000068 696E67203A2000     
+    10 00000078 496E707574206E756D-     j: db "Input number : ",0
+    11 00000078 626572203A2000     
+    12 00000088 456E74657265642073-     k: db "Entered string is %s",0x0a,0
+    13 00000088 7472696E6720697320-
+    14 00000088 25730A00           
+    15 0000009E 456E7465726564206E-     l: db "Entered number is %d",0x0a,0
+    16 0000009E 756D62657220697320-
+    17 0000009E 25640A00           
+    18 000000B4 257300                  scans: db "%s",0
+    19 000000B7 256400                  scann: db "%d",0
+    20                                 
+    21                                 [segment .text]
+    22                                 main:
+    23 00000000 55                      push rbp
+    24 00000001 488D3C25[00000000]      lea rdi,[i]
+    25 00000009 31C0                    xor eax,eax
+    26 0000000B E8(F6FFFFFF)            call printf
+    27                                 
+    28 00000010 488D3C25[00000000]      lea rdi,[scans]
+    29 00000018 488D3425[00000000]      lea rsi,[s]
+    30 00000020 31C0                    xor eax,eax
+    31 00000022 E8(F6FFFFFF)            call scanf
+    32                                 
+    33 00000027 488D3C25[00000000]      lea rdi,[k]
+    34 0000002F 488D3425[00000000]      lea rsi,[s]
+    35 00000037 31C0                    xor eax,eax
+    36 00000039 E8(F6FFFFFF)            call printf
+    37                                 
+    38 0000003E 488D3C25[00000000]      lea rdi,[j]
+    39 00000046 31C0                    xor eax,eax
+    40 00000048 E8(F6FFFFFF)            call printf
+    41                                 
+    42 0000004D 488D3C25[00000000]      lea rdi,[scann]
+    43 00000055 488D3425[00000000]      lea rsi,[x]
+    44 0000005D 31C0                    xor eax,eax
+    45 0000005F E8(F6FFFFFF)            call scanf
+    46                                 
+    47 00000064 488D3C25[00000000]      lea rdi,[l]
+    48 0000006C 8B1425[00000000]        mov edx,[x]
+    49 00000073 31C0                    xor eax,eax
+    50 00000075 E8(F6FFFFFF)            call printf
+    51                                 
+    52 0000007A 5D                      pop rbp
+    53 0000007B C3                      ret
